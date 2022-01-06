@@ -1,6 +1,6 @@
 # Sprite Sheet Slicer
  
-<h2> A tool to slice sprite sheets into single sprites, directly in Max/MSP. </h2>
+## A tool to slice sprite sheets into single sprites, directly in Max/MSP. 
 
 <h3> What it can do: </h3>
 
