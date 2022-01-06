@@ -22,6 +22,7 @@ function SpriteSheet()
 
     this.LoadSpriteSheet = function(path)
     {   
+        this.EmptyMatricesArray();
         this.imagePath = path;
         this.spriteSheetImageName = path.replace(/^.*[\\\/]/, '');
         this.spriteSheetImageName = this.spriteSheetImageName.replace(/\.[^/.]+$/, "");
@@ -95,7 +96,7 @@ function SpriteSheet()
         if (this.selectedSpriteIndex >= 0 && this.selectedSpriteIndex < this.outputMatrices.length)
         {   
             var imgSize = [gJSUISize[1]*0.666, gJSUISize[1]*0.666];
-            var imgPos = [this.spriteSheetImage.size[0]+gJSUISize[0]/20, gJSUISize[1]/6];
+            var imgPos = [this.spriteSheetImage.size[0]+gJSUISize[0]/20, (gJSUISize[1]/6)];
             mg.identity_matrix();
 
             this.CreateCheckerPattern(mg,50,imgSize,imgPos);
@@ -259,7 +260,7 @@ function SpriteSheet()
                     for (var j=0; j<rows; j++)
                     {   
                         var yPos = j*(sliceAreaY+yPad);
-                        if (yPos < this.spriteSheetImage.size[1])
+                        if ((yPos+sliceAreaY) < this.spriteSheetImage.size[1])
                         {
                             mg.set_source_rgba(1,0,0,1);
                             mg.set_line_width(1);
@@ -298,7 +299,7 @@ function SpriteSheet()
             mg.set_source_rgba([1,1,1,1]);
             var string = "Ignore Zero Alpha Sprites: "+this.ignoreZeroAlpha;
             var textMeasure = mg.text_measure(string);
-            mg.move_to(gJSUISize[0]/2, textMeasure[1]);
+            mg.move_to(gJSUISize[0]*0.6666, textMeasure[1]);
             mg.text_path(string);
             mg.fill();
         }
