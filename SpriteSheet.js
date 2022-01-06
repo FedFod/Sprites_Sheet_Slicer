@@ -64,7 +64,7 @@ function SpriteSheet()
             }
         }
     }
-
+ 
     this.ExportSprites = function(path)
     {   
         print(path)
@@ -86,14 +86,25 @@ function SpriteSheet()
         if (index >= 0 && index < this.outputMatrices.length)
         {   
             var matName = this.outputMatrices[index].name;
-            outlet(0, matName);
+            outlet(0, ["jit_matrix", matName]);
             this.selectedSpriteIndex = index;
         }
     }
 
+    this.OutputSpritesArray = function()
+    {   
+        var namesArray = ["matrices_names"];
+        for (var mat in this.outputMatrices)
+        {
+            namesArray.push(this.outputMatrices[mat].name);
+        }
+        outlet(0, namesArray);
+    }
+
     this.DrawSelectedSprite = function(mg)
     {   
-        if (this.selectedSpriteIndex >= 0 && this.selectedSpriteIndex < this.outputMatrices.length)
+        if (this.selectedSpriteIndex >= 0 && this.selectedSpriteIndex < this.outputMatrices.length && 
+            gJSUISize[0] > (this.spriteSheetImage.size[0]+(this.border[3]*4)))
         {   
             var imgSize = [gJSUISize[1]*0.666, gJSUISize[1]*0.666];
             var imgPos = [this.spriteSheetImage.size[0]+gJSUISize[0]/20, (gJSUISize[1]/6)];

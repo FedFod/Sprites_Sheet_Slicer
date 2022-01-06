@@ -43,6 +43,11 @@ function output_sprite(index)
     mgraphics.redraw();
 }
 
+function output_matrices_names_list()
+{
+    spriteSheet.OutputSpritesArray();
+}
+
 function slice_area(width, height)
 {
     spriteSheet.SetSliceArea(width, height);
