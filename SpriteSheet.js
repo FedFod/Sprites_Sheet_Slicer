@@ -2,6 +2,7 @@ function SpriteSheet()
 {
     this.spriteSheetImage = null;
     this.spriteSheetMatrix = new JitterMatrix();
+    this.spriteToDrawImage = new Image();
     this.imagePath = null;
     this.spriteSheetImageName = null;
     this.spriteSheetImageRatio = -1;
@@ -17,6 +18,7 @@ function SpriteSheet()
     this.outputMatrices = [];
     this.ignoreZeroAlpha = 0;
     this.jit3m = new JitterObject("jit.3m");
+    this.selectedSpriteIndex = -1;
 
     this.LoadSpriteSheet = function(path)
     {   
@@ -45,7 +47,7 @@ function SpriteSheet()
         {
             for (var j=0; j<columns; j++)
             {
-                this.outputMatrices.push(new JitterMatrix(4, "float32", this.sliceArea.slice()));
+                this.outputMatrices.push(new JitterMatrix(4, "char", this.sliceArea.slice()));
                 this.outputMatrices[this.outputMatrices.length-1].usesrcdim = 1;
                 this.outputMatrices[this.outputMatrices.length-1].srcdimstart = [(this.sliceArea[0]+this.slicePadding[0])*j, 
                                                                                 (this.sliceArea[1]+this.slicePadding[1])*i];
@@ -81,8 +83,35 @@ function SpriteSheet()
     this.OutputSprite = function(index)
     {   
         if (index >= 0 && index < this.outputMatrices.length)
-        {
-            outlet(0, this.outputMatrices[index].name);
+        {   
+            var matName = this.outputMatrices[index].name;
+            outlet(0, matName);
+            this.selectedSpriteIndex = index;
+        }
+    }
+
+    this.DrawSelectedSprite = function(mg)
+    {   
+        if (this.selectedSpriteIndex >= 0 && this.selectedSpriteIndex < this.outputMatrices.length)
+        {   
+            var imgSize = [gJSUISize[1]*0.666, gJSUISize[1]*0.666];
+            var imgPos = [this.spriteSheetImage.size[0]+gJSUISize[0]/20, gJSUISize[1]/6];
+            mg.identity_matrix();
+
+            this.CreateCheckerPattern(mg,50,imgSize,imgPos);
+
+            var tempMatrix = new JitterMatrix();
+            tempMatrix.dim = [gJSUISize[1]*0.666, gJSUISize[1]*0.666];
+            tempMatrix.adapt = 0;
+            tempMatrix.planecount = 4;
+            tempMatrix.frommatrix(this.outputMatrices[this.selectedSpriteIndex].name);
+
+            this.spriteToDrawImage.scale(imgSize);
+            this.spriteToDrawImage.fromnamedmatrix(tempMatrix.name);
+            mg.translate(imgPos);
+            mg.image_surface_draw(this.spriteToDrawImage);
+
+            tempMatrix.freepeer();
         }
     }
 
@@ -132,24 +161,28 @@ function SpriteSheet()
     this.FillSpriteSheetBackground = function(mg)
     {   
         if (this.spriteSheetImage != null)
-        {
-            var checkerSize = 10;
-            var colors = [[0.6,0.6,0.6,1], [0.8,0.8,0.8,1]];
-            var counter = 0;
-            for (var i=0; i<this.spriteSheetImage.size[0]; i+=checkerSize)
-            {   
-                counter = 0;
-                if ((i%(checkerSize*2)) == 0)
-                {
-                    counter = 1;
-                } 
-                for (var j=0; j<this.spriteSheetImage.size[1]; j+=checkerSize)
-                {  
-                    mg.set_source_rgba(colors[counter%2]);
-                    mg.rectangle(i+this.border[3]/2, j+this.border[3], checkerSize, checkerSize);
-                    mg.fill();
-                    counter++;
-                }
+        {   
+            this.CreateCheckerPattern(mg,10,this.spriteSheetImage.size,[this.border[3]/2, this.border[3]]);
+        }
+    }
+
+    this.CreateCheckerPattern = function(mg, checkerSize, imageSize, leftCorner)
+    {
+        var colors = [[0.6,0.6,0.6,1], [0.8,0.8,0.8,1]];
+        var counter = 0;
+        for (var i=0; i<imageSize[0]; i+=checkerSize)
+        {   
+            counter = 0;
+            if ((i%(checkerSize*2)) == 0)
+            {
+                counter = 1;
+            } 
+            for (var j=0; j<imageSize[1]; j+=checkerSize)
+            {  
+                mg.set_source_rgba(colors[counter%2]);
+                mg.rectangle(i+leftCorner[0], j+leftCorner[1], checkerSize, checkerSize);
+                mg.fill();
+                counter++;
             }
         }
     }
@@ -275,6 +308,7 @@ function SpriteSheet()
     {
         this.spriteSheetImage.freepeer();
         this.spriteSheetMatrix.freepeer();
+        this.spriteToDrawImage.freepeer();
         this.jit3m.freepeer();
     }
 }

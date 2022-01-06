@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 32.0, 70.0, 1852.0, 929.0 ],
+		"rect" : [ 34.0, 77.0, 1852.0, 929.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,13 +40,61 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-25",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 1202.0, 128.946564674377441, 36.0, 22.0 ],
+					"text" : "% 30"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-19",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "float" ],
+					"patching_rect" : [ 1202.0, 103.0, 39.0, 22.0 ],
+					"text" : "/ 100."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-13",
+					"maxclass" : "toggle",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1202.0, 42.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "float" ],
+					"patching_rect" : [ 1202.0, 79.0, 47.0, 22.0 ],
+					"text" : "clocker"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-40",
 					"maxclass" : "toggle",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1343.969547510147095, 132.0, 24.0, 24.0 ]
+					"patching_rect" : [ 1362.0, 172.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -57,7 +105,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1183.969547510147095, 167.0, 179.0, 22.0 ],
+					"patching_rect" : [ 1202.0, 207.0, 179.0, 22.0 ],
 					"text" : "pak ignore_zero_alpha_sprites i"
 				}
 
@@ -255,8 +303,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 911.935103660526238, 163.946564674377441, 67.0, 22.0 ],
-					"text" : "cut_sprites"
+					"patching_rect" : [ 911.935103660526238, 163.946564674377441, 75.0, 22.0 ],
+					"text" : "slice_sprites"
 				}
 
 			}
@@ -317,7 +365,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 276.831539392471313, 156.290076494216919, 228.0, 50.0 ],
-					"text" : "\"D:/MyData/My Files/Assets/Sprite_Sheets/SPA_Rock_Grass_Water.png\""
+					"text" : "\"D:/MyData/My Files/Assets/Sprite_Sheets/SPA_Player_Ginger.png\""
 				}
 
 			}
@@ -353,7 +401,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 109.610169410705566, 253.402897298336029, 424.140380090179406, 507.005336344242096 ]
+					"patching_rect" : [ 109.610169410705566, 261.402897298336029, 1215.389830589294434, 496.005336344242096 ]
 				}
 
 			}
@@ -376,6 +424,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
 					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-13", 0 ]
 				}
 
 			}
@@ -434,6 +489,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-25", 0 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-29", 0 ],
 					"source" : [ "obj-2", 0 ]
 				}
@@ -476,6 +538,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-36", 0 ],
+					"source" : [ "obj-25", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"source" : [ "obj-28", 0 ]
 				}
@@ -494,6 +563,13 @@
 					"destination" : [ "obj-30", 0 ],
 					"order" : 1,
 					"source" : [ "obj-29", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-19", 0 ],
+					"source" : [ "obj-3", 0 ]
 				}
 
 			}

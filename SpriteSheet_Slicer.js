@@ -32,14 +32,15 @@ function destroy_mat_array()
     spriteSheet.EmptyMatricesArray();
 }
 
-function cut_sprites()
+function slice_sprites()
 {
     spriteSheet.CutSprites();
 }
 
 function output_sprite(index)
 {
-    spriteSheet.OutputSprite(index);
+    spriteSheet.OutputSprite(index, mgraphics);
+    mgraphics.redraw();
 }
 
 function slice_area(width, height)
@@ -84,6 +85,7 @@ function paint()
     spriteSheet.DrawIgnoreAlphaText(mgraphics);
     spriteSheet.DrawSpriteSheet(mgraphics);
     spriteSheet.DrawHighlightAreas(mgraphics);
+    spriteSheet.DrawSelectedSprite(mgraphics);
 }
 paint.local = 1;
 
