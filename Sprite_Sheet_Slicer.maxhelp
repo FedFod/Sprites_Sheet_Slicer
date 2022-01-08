@@ -306,8 +306,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 992.935103660526238, 116.946564674377441, 109.0, 22.0 ],
-					"text" : "destroy_mat_array"
+					"patching_rect" : [ 992.935103660526238, 116.946564674377441, 77.0, 22.0 ],
+					"text" : "notifydeleted"
 				}
 
 			}
@@ -416,7 +416,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 232.831539392471313, 138.0, 228.0, 50.0 ],
-					"text" : "\"D:/MyData/My Files/Assets/Sprite_Sheets/Wood_cutter/3 SteamMan/SteamMan_jump.png\""
+					"text" : "\"D:/MyData/My Files/Assets/Sprite_Sheets/SPA_Player_Ginger.png\""
 				}
 
 			}
@@ -452,7 +452,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 58.610169410705566, 256.402897298336029, 789.324934249820672, 235.005336344242096 ]
+					"patching_rect" : [ 58.610169410705566, 274.402897298336029, 1009.324934249820672, 345.005336344242096 ]
 				}
 
 			}

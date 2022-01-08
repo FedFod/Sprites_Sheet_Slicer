@@ -20,6 +20,7 @@ function SpriteSheet()
     this.ignoreZeroAlpha = 0;
     this.jit3m = new JitterObject("jit.3m");
     this.selectedSpriteIndex = -1;
+    this.textXSize = [];
 
     this.LoadSpriteSheet = function(path)
     {   
@@ -275,7 +276,7 @@ function SpriteSheet()
             for (var i=0; i<columns; i++)
             {   
                 var xPos = i*(sliceAreaX+xPad)+xOffset;
-                if (xPos <= this.spriteSheetImage.size[0]+10)
+                if ((xPos+sliceAreaX) <= this.spriteSheetImage.size[0]+10)
                 {
                     for (var j=0; j<rows; j++)
                     {   
@@ -305,8 +306,9 @@ function SpriteSheet()
             mg.set_source_rgba([1,1,1,1]);
             var sizeString = "Image Size: "+this.originalImageSize[0] + " x " + this.originalImageSize[1];
             var textMeasure = mg.text_measure(sizeString);
-            mg.move_to(gJSUISize[0]/20, textMeasure[1]);
+            mg.move_to(40, textMeasure[1]);
             mg.text_path(sizeString);
+            this.textXSize = mg.text_measure(sizeString);
             mg.fill();
         }
     }
@@ -319,7 +321,7 @@ function SpriteSheet()
             mg.set_source_rgba([1,1,1,1]);
             var string = "Ignore Zero Alpha Sprites: "+this.ignoreZeroAlpha;
             var textMeasure = mg.text_measure(string);
-            mg.move_to(gJSUISize[0]*0.6666, textMeasure[1]);
+            mg.move_to(this.textXSize[0]+100, textMeasure[1]);
             mg.text_path(string);
             mg.fill();
         }

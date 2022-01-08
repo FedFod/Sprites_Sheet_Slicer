@@ -114,4 +114,3 @@ function notifydeleted()
 {
     spriteSheet.Destroy();
 }
-notifydeleted.local = 1;
