@@ -54,6 +54,12 @@ function slice_area(width, height)
     mgraphics.redraw();
 }
 
+function slice_offset(offsetX, offsetY)
+{
+    spriteSheet.SetSliceOffset(offsetX, offsetY);
+    mgraphics.redraw();
+}
+
 function slice_padding(width, height)
 {
     spriteSheet.SetSlicePadding(width, height);

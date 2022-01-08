@@ -13,6 +13,7 @@ function SpriteSheet()
     this.originalImageSize = [0,0];
     this.sliceArea = [38,38];
     this.slicePadding = [0,0];
+    this.sliceOffset = [0,0];
     this.rescaleFactor = [1,1];
     this.drawArea = [1,1];
     this.outputMatrices = [];
@@ -50,10 +51,10 @@ function SpriteSheet()
             {
                 this.outputMatrices.push(new JitterMatrix(4, "char", this.sliceArea.slice()));
                 this.outputMatrices[this.outputMatrices.length-1].usesrcdim = 1;
-                this.outputMatrices[this.outputMatrices.length-1].srcdimstart = [(this.sliceArea[0]+this.slicePadding[0])*j, 
-                                                                                (this.sliceArea[1]+this.slicePadding[1])*i];
-                this.outputMatrices[this.outputMatrices.length-1].srcdimend = [(this.sliceArea[0]+this.slicePadding[0])*j+this.sliceArea[0], 
-                                                                              (this.sliceArea[1]+this.slicePadding[1])*i+this.sliceArea[1]];
+                this.outputMatrices[this.outputMatrices.length-1].srcdimstart = [(this.sliceArea[0]+this.slicePadding[0])*j+this.sliceOffset[0], 
+                                                                                (this.sliceArea[1]+this.slicePadding[1])*i+this.sliceOffset[1]];
+                this.outputMatrices[this.outputMatrices.length-1].srcdimend = [(this.sliceArea[0]+this.slicePadding[0])*j+this.sliceArea[0]+this.sliceOffset[0], 
+                                                                              (this.sliceArea[1]+this.slicePadding[1])*i+this.sliceArea[1]+this.sliceOffset[1]];
                 this.outputMatrices[this.outputMatrices.length-1].frommatrix(this.spriteSheetMatrix.name);
                 this.jit3m.matrixcalc(this.outputMatrices[this.outputMatrices.length-1],this.outputMatrices[this.outputMatrices.length-1]);
 
@@ -146,6 +147,11 @@ function SpriteSheet()
         return this.spriteSheetImageRatio;
     }
     
+    this.SetSliceOffset = function(offsetX, offsetY)
+    {
+        this.sliceOffset = [offsetX, offsetY];
+    }
+
     this.SetSliceArea = function(width, height)
     {   
         var tempWidth = Math.max(width, 1);
@@ -260,18 +266,21 @@ function SpriteSheet()
             var xPad = this.slicePadding[0] * finalScaleX;
             var yPad = this.slicePadding[1] * finalScaleY;
 
+            var xOffset = this.sliceOffset[0] * finalScaleX;
+            var yOffset = this.sliceOffset[1] * finalScaleY;
+
             var columns = Math.floor(this.originalImageSize[0] / this.sliceArea[0]);  
             var rows = Math.floor(this.originalImageSize[1] / this.sliceArea[1]);
 
             for (var i=0; i<columns; i++)
             {   
-                var xPos = i*(sliceAreaX+xPad);
-                if (xPos < this.spriteSheetImage.size[0])
+                var xPos = i*(sliceAreaX+xPad)+xOffset;
+                if (xPos <= this.spriteSheetImage.size[0]+10)
                 {
                     for (var j=0; j<rows; j++)
                     {   
-                        var yPos = j*(sliceAreaY+yPad);
-                        if ((yPos+sliceAreaY) < this.spriteSheetImage.size[1])
+                        var yPos = j*(sliceAreaY+yPad)+yOffset;
+                        if ((yPos+sliceAreaY) <= this.spriteSheetImage.size[1]+10)
                         {
                             mg.set_source_rgba(1,0,0,1);
                             mg.set_line_width(1);
