@@ -21,6 +21,11 @@ function SpriteSheet()
     this.jit3m = new JitterObject("jit.3m");
     this.selectedSpriteIndex = -1;
     this.textXSize = [];
+    this.bgImage = new Image("imageBG.png");
+
+    this.mg = null;
+    this.offscreenBuffer = null;
+    this.squaresPositions = [];
 
     this.LoadSpriteSheet = function(path)
     {   
@@ -57,7 +62,8 @@ function SpriteSheet()
                 this.outputMatrices[this.outputMatrices.length-1].srcdimend = [(this.sliceArea[0]+this.slicePadding[0])*j+this.sliceArea[0]+this.sliceOffset[0], 
                                                                               (this.sliceArea[1]+this.slicePadding[1])*i+this.sliceArea[1]+this.sliceOffset[1]];
                 this.outputMatrices[this.outputMatrices.length-1].frommatrix(this.spriteSheetMatrix.name);
-                this.jit3m.matrixcalc(this.outputMatrices[this.outputMatrices.length-1],this.outputMatrices[this.outputMatrices.length-1]);
+                // this.outputMatrices[this.outputMatrices.length-1].column_row = [i, j]; 
+                this.jit3m.matrixcalc(this.outputMatrices[this.outputMatrices.length-1], this.outputMatrices[this.outputMatrices.length-1]);
 
                 if (this.jit3m.mean[3] == 0.0 && this.ignoreZeroAlpha)
                 {
@@ -110,9 +116,10 @@ function SpriteSheet()
         {   
             var imgSize = [gJSUISize[1]*0.666, gJSUISize[1]*0.666];
             var imgPos = [this.spriteSheetImage.size[0]+gJSUISize[0]/20, (gJSUISize[1]/6)];
-            mg.identity_matrix();
 
-            this.CreateCheckerPattern(mg,50,imgSize,imgPos);
+            // this.CreateCheckerPattern(mg,50,imgSize,imgPos);
+            var tempBG = new Image("imageBG.png");
+            tempBG.scale(imgSize);
 
             var tempMatrix = new JitterMatrix();
             tempMatrix.dim = [gJSUISize[1]*0.666, gJSUISize[1]*0.666];
@@ -122,10 +129,13 @@ function SpriteSheet()
 
             this.spriteToDrawImage.scale(imgSize);
             this.spriteToDrawImage.fromnamedmatrix(tempMatrix.name);
+            mg.identity_matrix();
             mg.translate(imgPos);
+            mg.image_surface_draw(tempBG);
             mg.image_surface_draw(this.spriteToDrawImage);
 
             tempMatrix.freepeer();
+            tempBG.freepeer();
         }
     }
 
@@ -181,8 +191,47 @@ function SpriteSheet()
     {   
         if (this.spriteSheetImage != null)
         {   
-            this.CreateCheckerPattern(mg,10,this.spriteSheetImage.size,[this.border[3]/2, this.border[3]]);
+            this.mg = new MGraphics(this.spriteSheetImage.size);
+            // this.CreateCheckerPattern(mg,10,this.spriteSheetImage.size,[this.border[3]/2, this.border[3]]);
+            var columns = this.spriteSheetImage.size[0] / this.bgImage.size[0];
+            var rows = this.spriteSheetImage.size[1] / this.bgImage.size[1];
+            for (var i=0; i<columns; i++)
+            {
+                for (var j=0; j<rows; j++)
+                {   
+                    this.mg.identity_matrix();
+                    this.mg.translate(i*this.bgImage.size[0], j*this.bgImage.size[1]);
+                    this.mg.image_surface_draw(this.bgImage);
+                }
+            }
+            this.offscreenBuffer = new Image(this.mg);
         }
+    }
+
+    this.DrawOffScreenBuffer = function(mg)
+    {   
+        if (this.offscreenBuffer != null)
+        {
+            mg.identity_matrix();
+            mg.translate(this.border[3]/2, this.border[3]);
+            mg.image_surface_draw(this.offscreenBuffer);
+        }
+    }
+
+    this.DrawIndexNumbers = function(mg)
+    {
+        for (var i=0; i<this.outputMatrices.length; i++)
+        {
+            mg.identity_matrix();
+            var textPosition = this.squaresPositions[i];
+            mg.move_to(textPosition);
+            mg.set_font_size(15);
+            mg.set_source_rgba([0,0,0,1]);
+            var string = i.toString(); 
+            this.textXSize = mg.text_measure(string);
+            mg.text_path(string);
+            mg.fill();
+        }   
     }
 
     this.CreateCheckerPattern = function(mg, checkerSize, imageSize, leftCorner)
@@ -210,6 +259,7 @@ function SpriteSheet()
     {   
         if (this.spriteSheetImage != null)
         {   
+            mg.identity_matrix();
             mg.translate(this.border[3]/2, this.border[3]);
             mg.image_surface_draw(this.spriteSheetImage);
         }
@@ -282,7 +332,8 @@ function SpriteSheet()
                     {   
                         var yPos = j*(sliceAreaY+yPad)+yOffset;
                         if ((yPos+sliceAreaY) <= this.spriteSheetImage.size[1]+10)
-                        {
+                        {   
+                            this.squaresPositions[i+(j*columns)] = [xPos, yPos];
                             mg.set_source_rgba(1,0,0,1);
                             mg.set_line_width(1);
                             mg.rectangle(xPos, yPos, sliceAreaX, sliceAreaY);
@@ -296,6 +347,7 @@ function SpriteSheet()
 
     this.DrawSizeText = function(mg)
     {	
+        mg.identity_matrix();
         mg.set_source_rgba(this.titleBacgroundColor);
         mg.rectangle(0,0,gJSUISize[0], this.border[3]);
         mg.fill();
@@ -305,10 +357,9 @@ function SpriteSheet()
             mg.set_font_size(12);
             mg.set_source_rgba([1,1,1,1]);
             var sizeString = "Image Size: "+this.originalImageSize[0] + " x " + this.originalImageSize[1];
-            var textMeasure = mg.text_measure(sizeString);
-            mg.move_to(40, textMeasure[1]);
-            mg.text_path(sizeString);
             this.textXSize = mg.text_measure(sizeString);
+            mg.move_to(40, this.textXSize[1]);
+            mg.text_path(sizeString);
             mg.fill();
         }
     }

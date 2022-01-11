@@ -35,6 +35,7 @@ function destroy_mat_array()
 function slice_sprites()
 {
     spriteSheet.CutSprites();
+    mgraphics.redraw();
 }
 
 function output_sprite(index)
@@ -70,6 +71,7 @@ function load_sprite_sheet(path)
 {
     spriteSheet.LoadSpriteSheet(path);
     spriteSheet.RescaleImage();
+    spriteSheet.FillSpriteSheetBackground(mgraphics);
     mgraphics.redraw();
 }
 
@@ -91,12 +93,13 @@ CalcWindowRatio.local = 1;
 function paint()
 {   
     spriteSheet.FillBackground(mgraphics);
-    spriteSheet.FillSpriteSheetBackground(mgraphics);
     spriteSheet.DrawSizeText(mgraphics);
     spriteSheet.DrawIgnoreAlphaText(mgraphics);
+    spriteSheet.DrawOffScreenBuffer(mgraphics);
     spriteSheet.DrawSpriteSheet(mgraphics);
     spriteSheet.DrawHighlightAreas(mgraphics);
     spriteSheet.DrawSelectedSprite(mgraphics);
+    // spriteSheet.DrawIndexNumbers(mgraphics);
 }
 paint.local = 1;
 
@@ -105,6 +108,7 @@ function onresize(width, height)
     CalcJSUISize();
     CalcWindowRatio();
     spriteSheet.RescaleImage();
+    spriteSheet.FillSpriteSheetBackground(mgraphics);
     mgraphics.redraw();
     // print(width, height)
 }
@@ -113,4 +117,5 @@ onresize.local = 1;
 function notifydeleted()
 {
     spriteSheet.Destroy();
+    mgraphics.redraw();
 }
