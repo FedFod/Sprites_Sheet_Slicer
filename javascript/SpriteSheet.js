@@ -114,15 +114,16 @@ function SpriteSheet()
         if (this.selectedSpriteIndex >= 0 && this.selectedSpriteIndex < this.outputMatrices.length && 
             gJSUISize[0] > (this.spriteSheetImage.size[0]+(this.border[3]*4)))
         {   
-            var imgSize = [gJSUISize[1]*0.666, gJSUISize[1]*0.666];
-            var imgPos = [this.spriteSheetImage.size[0]+gJSUISize[0]/20, (gJSUISize[1]/6)];
+            var imgSide = (gJSUISize[1]-this.border[3])*(3/4);
+            var imgSize = [imgSide, imgSide];
+            var imgPos = [this.spriteSheetImage.size[0]+gJSUISize[0]/20, ((gJSUISize[1]-this.border[3])/8)+this.border[3]];
 
             // this.CreateCheckerPattern(mg,50,imgSize,imgPos);
             var tempBG = new Image("imageBG.png");
             tempBG.scale(imgSize);
 
             var tempMatrix = new JitterMatrix();
-            tempMatrix.dim = [gJSUISize[1]*0.666, gJSUISize[1]*0.666];
+            tempMatrix.dim = imgSize.slice();
             tempMatrix.adapt = 0;
             tempMatrix.planecount = 4;
             tempMatrix.frommatrix(this.outputMatrices[this.selectedSpriteIndex].name);

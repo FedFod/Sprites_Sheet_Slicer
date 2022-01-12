@@ -1,0 +1,3 @@
+max objectfile jit.spritesheetslicer jit.spritesheetslicer;
+max definesubstitution jit.spritesheetslicer jsui @filename SpriteSheet.js;
+

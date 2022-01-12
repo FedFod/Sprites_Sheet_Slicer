@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 245.0, 114.0, 1647.0, 900.0 ],
+		"rect" : [ 34.0, 77.0, 1607.0, 929.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,24 +40,25 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-31",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 331.0, 725.0, 162.0, 22.0 ],
-					"text" : "jit_matrix u621002977"
+					"id" : "obj-38",
+					"maxclass" : "number",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 605.435111284255981, 87.0, 50.0, 22.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-27",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1193.0, 392.0, 80.0, 20.0 ],
-					"text" : "Add numbers"
+					"id" : "obj-31",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 153.0, 469.0, 381.0, 22.0 ],
+					"text" : "matrices_names u351001054 u432001056 u326001058 u093001060"
 				}
 
 			}
@@ -131,7 +132,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1181.935103660526238, 202.471596896648407, 158.0, 22.0 ],
+					"patching_rect" : [ 612.935103660526238, 208.471596896648407, 158.0, 22.0 ],
 					"text" : "output_matrices_names_list"
 				}
 
@@ -143,7 +144,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 58.610169410705566, 701.06435489654541, 204.0, 22.0 ],
+					"patching_rect" : [ 58.610169410705566, 609.06435489654541, 204.0, 22.0 ],
 					"text" : "routepass jit_matrix matrices_names"
 				}
 
@@ -155,8 +156,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 236.568436622619629, 783.0, 870.0, 22.0 ],
-					"text" : "matrices_names"
+					"patching_rect" : [ 292.896926403045654, 655.0, 870.0, 22.0 ],
+					"text" : "matrices_names u351001054 u432001056 u326001058 u093001060"
 				}
 
 			}
@@ -239,7 +240,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 826.750549500884972, 202.471596896648407, 336.0, 22.0 ],
+					"patching_rect" : [ 793.750549500884972, 208.471596896648407, 336.0, 22.0 ],
 					"text" : "export_sprites \"C:/Users/Federico Foderaro/Desktop/Sprites/\""
 				}
 
@@ -280,19 +281,6 @@
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 711.396926403045654, 116.946564674377441, 50.0, 22.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"format" : 6,
-					"id" : "obj-15",
-					"maxclass" : "flonum",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 605.435111284255981, 86.0, 50.0, 22.0 ]
 				}
 
 			}
@@ -342,7 +330,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1197.999998807907104, 123.0, 50.0, 22.0 ]
+					"patching_rect" : [ 1258.0, 151.946564674377441, 50.0, 22.0 ]
 				}
 
 			}
@@ -353,7 +341,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1109.999998807907104, 155.0, 107.0, 22.0 ],
+					"patching_rect" : [ 1170.0, 178.471596896648407, 107.0, 22.0 ],
 					"text" : "pak output_sprite i"
 				}
 
@@ -365,7 +353,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 58.610169410705566, 733.06435489654541, 161.0, 141.0 ],
+					"patching_rect" : [ 58.610169410705566, 641.06435489654541, 204.0, 126.0 ],
 					"sync" : 1
 				}
 
@@ -439,7 +427,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 232.831539392471313, 138.0, 228.0, 50.0 ],
-					"text" : "\"D:/MyData/My Files/Assets/Sprite_Sheets/SPA_Player_Ginger.png\""
+					"text" : "\"D:/MyData/My Files/Assets/Andrea_Spontoni/Muro_Innevato_01.png\""
 				}
 
 			}
@@ -475,7 +463,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 58.610169410705566, 250.402897298336029, 1063.786756992340088, 418.005336344242096 ]
+					"patching_rect" : [ 58.610169410705566, 250.402897298336029, 1118.324934249820672, 161.005336344242096 ]
 				}
 
 			}
@@ -524,24 +512,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-15", 0 ],
+					"destination" : [ "obj-38", 0 ],
 					"source" : [ "obj-14", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-10", 0 ],
-					"order" : 0,
-					"source" : [ "obj-15", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-9", 0 ],
-					"order" : 1,
-					"source" : [ "obj-15", 0 ]
 				}
 
 			}
@@ -693,6 +665,22 @@
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"source" : [ "obj-37", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"order" : 0,
+					"source" : [ "obj-38", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-9", 0 ],
+					"order" : 1,
+					"source" : [ "obj-38", 0 ]
 				}
 
 			}
