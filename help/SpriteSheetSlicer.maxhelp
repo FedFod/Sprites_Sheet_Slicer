@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 77.0, 1852.0, 929.0 ],
+		"rect" : [ 116.0, 120.0, 1852.0, 877.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -754,7 +754,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 54.0, 317.0, 856.0, 424.0 ]
+					"patching_rect" : [ 54.0, 336.0, 890.0, 388.0 ]
 				}
 
 			}
@@ -778,7 +778,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 264.286756992340088, 758.06435489654541, 381.0, 22.0 ],
-					"text" : "jit_matrix u416006853"
+					"text" : "jit_matrix u830010078"
 				}
 
 			}
@@ -833,13 +833,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-6",
-					"linecount" : 2,
+					"linecount" : 4,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 404.935103660526238, 824.06435489654541, 648.0, 36.0 ],
-					"text" : "matrix_names u726006841 u842006843 u503006845 u641006847 u529006849 u983006851 u416006853 u051006855 u617006857 u928006859 u355006861 u539006863 u018006865 u264006867 u106006869 u420006871"
+					"patching_rect" : [ 404.935103660526238, 824.06435489654541, 648.0, 64.0 ],
+					"text" : "matrix_names u534009988 u292009990 u712009992 u896009994 u404009996 u518010010 u404010012 u212010014 u682010016 u680010032 u794010034 u375010036 u172010038 u980010040 u150010054 u876010056 u742010076 u830010078 u280010080 u124010098 u093010100 u180010102 u939010104 u860010106 u719010108 u416010110 u103010112 u070010114 u600010116"
 				}
 
 			}
@@ -1037,19 +1037,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-11",
-					"linecount" : 3,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 228.831539392471313, 213.0, 228.0, 50.0 ],
-					"text" : "\"D:/MyData/My Files/Assets/Sprite_Sheets/SPA_Player_Ginger.png\""
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "dropfile",
 					"numinlets" : 1,
@@ -1084,13 +1071,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-5", 1 ],
 					"source" : [ "obj-10", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-7", 0 ],
-					"source" : [ "obj-11", 0 ]
 				}
 
 			}
@@ -1366,16 +1346,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-11", 1 ],
-					"order" : 0,
-					"source" : [ "obj-8", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"order" : 1,
 					"source" : [ "obj-8", 0 ]
 				}
 
@@ -1397,8 +1368,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "SpriteSheetSlicer.js",
-				"bootpath" : "D:/MyData/Lavori/Cycling74/Sprites_Project/javascript",
-				"patcherrelativepath" : "../javascript",
+				"bootpath" : "~/Documents/Max 8/Packages/spritesheetslicer/javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}

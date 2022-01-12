@@ -401,8 +401,10 @@ function SpriteSheet()
     this.Destroy = function()
     {   
         this.Clear();
-        this.spriteSheetMatrix.freepeer();
-        this.spriteToDrawImage.freepeer();
+        if (this.spriteSheetMatrix != null)
+            this.spriteSheetMatrix.freepeer();
+        if (this.spriteToDrawImage != null)
+            this.spriteToDrawImage.freepeer();
         this.bgImage.freepeer();
         this.jit3m.freepeer();
     }
