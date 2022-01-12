@@ -1,7 +1,7 @@
 autowatch = 1;
 outlets = 1;
 
-include("SpriteSheet.js");
+include("SpriteSheetSlicer_SpriteSheet.js");
 
 mgraphics.init();
 mgraphics.relative_coords = 0;
@@ -9,6 +9,7 @@ mgraphics.autofill = 0;
 
 var gWindowRatio = 1;
 var gJSUISize = [0,0];
+SetJSUIInitialSize();
 CalcJSUISize();
 CalcWindowRatio();
 
@@ -75,7 +76,18 @@ function load_sprite_sheet(path)
     mgraphics.redraw();
 }
 
+function clear()
+{
+    spriteSheet.Clear();
+    mgraphics.redraw();
+}
+
 //PRIVATE FUNCTIONS -----------
+
+function SetJSUIInitialSize()
+{
+    box.rect = [box.rect[0], box.rect[1],box.rect[0]+380, box.rect[1]+200];
+}
 
 function CalcJSUISize()
 {
@@ -95,6 +107,7 @@ function paint()
     spriteSheet.FillBackground(mgraphics);
     spriteSheet.DrawSizeText(mgraphics);
     spriteSheet.DrawIgnoreAlphaText(mgraphics);
+    spriteSheet.DrawNumberOfSpritesText(mgraphics);
     spriteSheet.DrawOffScreenBuffer(mgraphics);
     spriteSheet.DrawSpriteSheet(mgraphics);
     spriteSheet.DrawHighlightAreas(mgraphics);
@@ -107,8 +120,11 @@ function onresize(width, height)
 {   
     CalcJSUISize();
     CalcWindowRatio();
-    spriteSheet.RescaleImage();
-    spriteSheet.FillSpriteSheetBackground(mgraphics);
+    if (spriteSheet)
+    {
+        spriteSheet.RescaleImage();
+        spriteSheet.FillSpriteSheetBackground(mgraphics);
+    }
     mgraphics.redraw();
     // print(width, height)
 }
@@ -119,3 +135,12 @@ function notifydeleted()
     spriteSheet.Destroy();
     mgraphics.redraw();
 }
+
+function print() 
+{
+	for (var i = 0; i < arguments.length; i++) {
+   		post(arguments[i]);
+  	}
+	post();
+}
+print.local = 1;
